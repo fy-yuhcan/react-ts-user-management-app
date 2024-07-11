@@ -2,10 +2,12 @@ import axios from "axios";
 import { useCallback, useState } from "react";
 import { User } from "../types/api/user";
 import { useNavigate } from "react-router-dom";
+import { useMessage } from "./useMessage";
 
 export const useAuth = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
+    const { showMessage } = useMessage();
 
     const login = useCallback((id: string) => {
         setLoading(true);
@@ -13,13 +15,18 @@ export const useAuth = () => {
             .then((res) => {
                 if (res.data) {
                     navigate("/home");
+                    showMessage({ title: "ログインしました", status: "success" });
                 } else {
-                    alert("ユーザーが見つかりません");
+                    showMessage({ title: "ユーザーが見つかりません", status: "error" });
                 }
             })
-            .catch(() => alert("ログインできません"))
-            .finally(() => setLoading(false));
-    }, [navigate]);
+            .catch(() => {
+                showMessage({ title: "ログインできません", status: "warning" });
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+    }, [navigate, showMessage]);
 
     return { login, loading, setLoading };
 };
