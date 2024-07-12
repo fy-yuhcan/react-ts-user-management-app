@@ -1,13 +1,15 @@
 import {  FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Stack, } from '@chakra-ui/react';
 import { VFC, memo } from 'react';
+import { User } from '../../../types/api/user';
 
 type Props={
+    user:User|null;
     isOpen: boolean;
     onClose: ()=>void;
 }
 
-export const UserDerailModal: VFC<Props> = memo((props) => {
-    const {isOpen,onClose} =props
+export const UserDetailModal: VFC<Props> = memo((props) => {
+    const {user,isOpen,onClose} =props
     return (
         <Modal isOpen={isOpen} onClose={onClose} motionPreset='slideInBottom'>
         <ModalOverlay>
@@ -18,19 +20,19 @@ export const UserDerailModal: VFC<Props> = memo((props) => {
               <Stack spacing={4}>
                 <FormControl>
                   <FormLabel>名前</FormLabel>
-                  <Input value="あああ" isReadOnly></Input>
+                  <Input value={user?.username} isReadOnly></Input>
                 </FormControl>
                 <FormControl>
                   <FormLabel>フルネーム</FormLabel>
-                  <Input value="あああ" isReadOnly></Input>
+                  <Input value={user?.name} isReadOnly></Input>
                 </FormControl>
                 <FormControl>
                   <FormLabel>メール</FormLabel>
-                  <Input value="あああ" isReadOnly></Input>
+                  <Input value={user?.email} isReadOnly></Input>
                 </FormControl>
                 <FormControl>
                   <FormLabel>電話番号</FormLabel>
-                  <Input value="あああ" isReadOnly></Input>
+                  <Input value={user?.phone} isReadOnly></Input>
                 </FormControl>
               </Stack>
             </ModalBody>
