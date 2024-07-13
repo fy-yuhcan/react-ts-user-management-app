@@ -8,18 +8,16 @@ import { LoginUserProvider } from '../providers/LoginUserProvider';
 
 export const Router: VFC = memo(() => {
   return (
-    <Routes>
-      <Route path="/" element={<Login />} />
-      <Route 
-        path="/home/*" 
-        element={
-          <LoginUserProvider>
-            <HomeRoutes />
-          </LoginUserProvider>
-        } 
-      />
-      <Route path="*" element={<Page404 />} />
-    </Routes>
+    <LoginUserProvider>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route 
+          path="/home/*" 
+          element={<HomeRoutes />}
+        />
+        <Route path="*" element={<Page404 />} />
+      </Routes>
+    </LoginUserProvider>
   );
 });
 

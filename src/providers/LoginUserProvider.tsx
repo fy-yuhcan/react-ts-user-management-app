@@ -1,7 +1,7 @@
 import { Dispatch, ReactNode, SetStateAction, createContext, useState } from "react";
 import { User } from "../types/api/user";
 
-export type LoginUser = User & { isAdmin: boolean }; // LoginUser 型に isAdmin を追加
+export type LoginUser = User & { isAdmin: boolean }; 
 
 export type LoginUserContextType = {
     loginUser: LoginUser | null;
